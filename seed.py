@@ -52,6 +52,3 @@ def load_guotes(filename):
                 quote.save()
 
 
-if __name__ == '__main__':
-    load_authors('authors_quotes/authors_quotes/authors_info.json')
-    load_guotes('authors_quotes/authors_quotes/quotes.json')
