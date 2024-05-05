@@ -1,9 +1,18 @@
+import os
 import scrapy
+
+
+if os.path.exists('quotes.json'):
+    os.remove('quotes.json')
 
 
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
-    custom_settings = {"FEED_FORMAT": "json", "FEED_URI": "authors_quotes/quotes.json"}
+    custom_settings = {"FEED_FORMAT": "json",
+                    "FEED_URI": "./quotes.json",
+                    "FEED_EXPORT_TRUNCATE": True,
+                    "FEED_EXPORT_ENCODING": "utf-8"
+                    }
     allowed_domains = ['quotes.toscrape.com']
     start_urls = ['http://quotes.toscrape.com/']
 
