@@ -23,3 +23,14 @@ class QuotesSpider(scrapy.Spider):
                 "author": quote.xpath("span/small/text()").extract(),
                 "quote": quote.xpath("span[@class='text']/text()").get()
             }
+
+        yield from self.next_p(response)
+
+    def next_p(self, response):
+        next_page = response.xpath("//li[@class='next']/a/@href").extract_first()
+        if next_page:
+            yield response.follow(next_page, self.parse)
+
+
+
+  

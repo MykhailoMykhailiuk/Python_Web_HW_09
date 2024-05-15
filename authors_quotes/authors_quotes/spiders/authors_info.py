@@ -22,6 +22,10 @@ class AuthorsInfoSpider(scrapy.Spider):
             author_link = quote.xpath("span/a/@href").extract()[0]
             yield response.follow(author_link, self.parse_author)
 
+        next_page = response.xpath("//li[@class='next']/a/@href").extract_first()
+        if next_page:
+            yield response.follow(next_page, self.parse)
+
     def parse_author(self, response):
         for author in response.xpath("//div[@class='author-details']"):
             yield {
